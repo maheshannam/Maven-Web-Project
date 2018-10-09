@@ -8,7 +8,11 @@ node {
        }
 
        stage('BuildArtifact'){
-        MAX_BUILDS = 5
+        sh 'mvn clean package'
+       }
+	
+	stage('maintain builds'){
+	     MAX_BUILDS = 5
 
 for (job in Jenkins.instance.items) {
   println job.name
@@ -22,7 +26,7 @@ for (job in Jenkins.instance.items) {
     }
   }
 }
-       }
+	}
 	   
       /*stage('Sonar') {
                     //add stage sonar
