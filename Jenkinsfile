@@ -1,5 +1,5 @@
 #!groovy
-
+properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5'))])
 node {
 	   
 	stage('Checkout'){
@@ -11,12 +11,6 @@ node {
           withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
           sh "mvn clean package"
           }
-       }
-	
-	
-       stage('BuildArtifact'){
-      sh "properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5'))])
-"
        }
 	
 	   
