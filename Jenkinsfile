@@ -8,20 +8,20 @@ node {
        }
 
        stage('BuildArtifact'){
-         def mvn_version = 'M2_HOME'
-         withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
-          sh "mvn clean package"
-	 }
-	       stage('Maintaing builds'){
-		       def jobName = $JOB_NAME
-def maxNumber = 5
+        MAX_BUILDS = 5
 
-Jenkins.instance.getItemByFullName(jobName).builds.findAll {
-  it.number <= maxNumber
-}.each {
-  it.delete()
+for (job in Jenkins.instance.items) {
+  println job.name
+
+  def recent = job.builds.limit(MAX_BUILDS)
+
+  for (build in job.builds) {
+    if (!recent.contains(build)) {
+      println "Preparing to delete: " + build
+      // build.delete()
+    }
+  }
 }
-	       }
        }
 	   
       /*stage('Sonar') {
