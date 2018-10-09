@@ -16,16 +16,7 @@ node {
 	
 	
        stage('BuildArtifact'){
-  hello = echo $JOB_NAME
-def jobName = hello
-def maxNumber = 5
-
-Jenkins.instance.getItemByFullName(jobName).builds.findAll {
-  it.number <= maxNumber
-}.each {
-  it.delete()
-}
-
+      sh "properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '5', numToKeepStr: ''))])"
        }
 	
 	   
