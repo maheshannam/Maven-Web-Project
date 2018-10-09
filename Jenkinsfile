@@ -13,7 +13,14 @@ node {
           sh "mvn clean package"
 	 }
 	       stage('Maintaing builds'){
-		       properties([[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '1']]]);
+		       def jobName = $JOB_NAME
+def maxNumber = 5
+
+Jenkins.instance.getItemByFullName(jobName).builds.findAll {
+  it.number <= maxNumber
+}.each {
+  it.delete()
+}
 	       }
        }
 	   
