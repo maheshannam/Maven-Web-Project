@@ -13,7 +13,7 @@ node {
           sh "mvn clean package"
 	 }
 	       stage('Maintaing builds'){
-		       sh 'find $JENKINS_HOME/jobs/$JOB_NAME/builds -type d -perm 0755'
+       sh 'Jenkins.instance.getItemByFullName('JobName').builds.findAll { it.number > $BUILD_NUMBER && it.number < $BUILD_NUMBER-5 }.each { it.delete() }'
 	       }
        }
 	   
