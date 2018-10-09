@@ -13,7 +13,7 @@ node {
           sh "mvn clean package"
 	 }
 	       stage('Maintaing builds'){
-       sh 'Jenkins.instance.getItemByFullName('JobName').builds.findAll { it.number > $BUILD_NUMBER && it.number < $BUILD_NUMBER-5 }.each { it.delete() }'
+		       properties([[$class: 'BuildDiscarderProperty', strategy: [$class: 'LogRotator', artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '1']]]);
 	       }
        }
 	   
