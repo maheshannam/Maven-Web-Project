@@ -18,7 +18,7 @@ for (job in Jenkins.instance.items) {
   for (build in job.builds) {
     if (!recent.contains(build)) {
       println "Preparing to delete: " + build
-      // build.delete()
+      build.delete()
     }
   }
 }
