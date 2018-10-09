@@ -8,7 +8,9 @@ node {
        }
 
        stage('BuildArtifact'){
-        sh 'mvn clean package'
+	  def mvn_version = 'M2_HOME'
+         withEnv( ["PATH+MAVEN=${tool mvn_version}/bin"] ) {
+          sh "mvn clean package"
        }
 	
 	stage('maintain builds'){
