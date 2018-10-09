@@ -10,15 +10,17 @@ node {
           checkout scm
        }
 	    
-       stage('Sonar') 
-       {
-                    //add stage sonar
-                    sh 'mvn sonar:sonar'
-       }
+      
 
        stage('Deploying to Nexus')
        {
-              sh 'mvn clean deploy'
+              sh 'mvn clean package'
+       }
+	    
+	    /* stage('Sonar') 
+       {
+                    //add stage sonar
+                    sh 'mvn sonar:sonar'
        }
 	    
 	stage('Checkstyle') 
@@ -45,7 +47,7 @@ node {
                      replyTo: 'mithunreddytechnologies@gmail.com',
                      subject: 'project build successful',
                      to: 'mithunreddytechnologies@gmail.com'
-       }*/
+       }*/ */
 	    
 	    
 
