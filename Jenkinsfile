@@ -16,7 +16,8 @@ node {
 	
 	
        stage('BuildArtifact'){
-      sh "properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '5', numToKeepStr: ''))])"
+      sh "properties([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '', numToKeepStr: '5'))])
+"
        }
 	
 	   
